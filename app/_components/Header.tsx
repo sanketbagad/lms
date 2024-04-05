@@ -63,7 +63,7 @@ const Header: FC<Props> = ({ activeItem, setOpen }) => {
               </div>
               <HiOutlineUserCircle
                 size={25}
-                className="cursor-pointer dark:text-white text-black ml-2"
+                className="hidden 800px:block cursor-pointer dark:text-white text-black ml-2"
                 onClick={() => {
                   setOpen(true);
                 }}
@@ -77,7 +77,7 @@ const Header: FC<Props> = ({ activeItem, setOpen }) => {
             id="screen"
             className="fixed w-full h-screen top-0 left-0 z-[99999] dark:bg-[unset] bg-[#00000024]"
           >
-            <div className="w-[70%] fixed z-[999999999] h-screen bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0">
+            <div className="w-[70%]  fixed z-[999999999] h-screen bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0">
                 <NavItems activeItem={activeItem} isMobile={true} />
                 <HiOutlineUserCircle
                   size={25}

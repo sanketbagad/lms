@@ -48,19 +48,26 @@ const NavItems = ({ activeItem, isMobile }: Props) => {
         ))}
       </div>
       {isMobile && (
-        <div className="mt-5 800px:hidden flex flex-col text-center m-5">
+        <div className="mt-5 800px:hidden flex flex-col">
+            <div className="w-full text-center py-6">
+                <Link href="/" passHref>
+                    <span className="text-[crimson] dark:text-[#37a39a] cursor-pointer font-Poppins font-[400] text-[18px]">
+                    LMS
+                    </span>
+                </Link>
+            </div>
             {navItemsData.map((item, index) => (
-            <Link href="/" passHref key={index}>
-              <span
-                className={`${
-                  activeItem === 0
-                    ? "text-[crimson] dark:text-[#37a39a]"
-                    : "text-black dark:text-white"
-                } cursor-pointer px-6 font-Poppins font-[400] text-[18px]`}
-              >
-                {item.name}
-              </span>
-            </Link>
+              <Link href="/" passHref key={index}>
+                <span
+                  className={`${
+                    activeItem === 0
+                      ? "text-[crimson] dark:text-[#37a39a]"
+                      : "text-black dark:text-white"
+                  } cursor-pointer px-6  font-Poppins font-[400] text-[18px]`}
+                >
+                  {item.name}
+                </span>
+              </Link>
             ))}
         </div>
       )}
