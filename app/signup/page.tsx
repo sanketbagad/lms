@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import Navbar from "../_components/ui/FloatingNavbar";
+import Navbar from "../_components/ui/Navbar";
 import EmailVerification from "../_components/EmailVerification";
 import { useUserRegistrationMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";

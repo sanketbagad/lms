@@ -2,9 +2,7 @@
 
 import { FC, useState } from "react";
 import Heading from "./utils/Heading";
-import Header from "./_components/Header";
-import { MacbookScroll } from "./_components/ui/MacbookScroll";
-import Navbar  from "./_components/ui/FloatingNavbar";
+import Navbar  from "./_components/ui/Navbar";
 import Hero from "./_components/Route/Hero";
 
 interface Props {}

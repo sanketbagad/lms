@@ -57,7 +57,7 @@ const NavItems = ({ activeItem, isMobile }: Props) => {
                 </Link>
             </div>
             {navItemsData.map((item, index) => (
-              <Link href="/" passHref key={index}>
+              <Link href={item.path} passHref key={index}>
                 <span
                   className={`${
                     activeItem === 0
