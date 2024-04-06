@@ -41,7 +41,7 @@ function Navbar() {
           {links.map((link, index) => (
             <li key={index}>
               <a
-                className="text-sm hover:text-blue-600 font-semibold text-white transition-colors duration-200"
+                className="text-sm hover:text-blue-600 font-semibold lg:text-white text-black transition-colors duration-200"
                 href={link.href}
               >
                 {link.text}
