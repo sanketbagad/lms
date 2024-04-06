@@ -1,4 +1,9 @@
 import type { Config } from "tailwindcss";
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config: Config = {
   content: [
@@ -18,18 +23,21 @@ const config: Config = {
         "gradiant-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      screens: {
-        "1000px": "1000px",
-        "1200px": "1200px",
-        "1100px": "1100px",
-        "1300px": "1300px",
-        "1400px": "1400px",
-        "1500px": "1500px",
-        "800px": "800px",
-        "400px": "400px",
-      },
     },
   },
-  plugins: [],
+  plugins: [
+    addVariablesForColors,
+  ],
 };
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+ 
+  addBase({
+    ":root": newVars,
+  });
+}
 export default config;
