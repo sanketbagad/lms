@@ -4,10 +4,15 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import Navbar from "../_components/ui/Navbar";
 import EmailVerification from "../_components/EmailVerification";
-import { useUserRegistrationMutation } from "@/redux/features/auth/authApi";
+import {
+  useSocialLoginMutation,
+  useUserRegistrationMutation,
+} from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import Heading from "../utils/Heading";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   name: string;
@@ -27,6 +32,9 @@ const Page = () => {
   const [userRegistration, { isError, data, isLoading, isSuccess }] =
     useUserRegistrationMutation();
 
+
+  const router = useRouter();
+
   useEffect(() => {
     if (isSuccess && data) {
       setVerificationData(data);
@@ -45,6 +53,14 @@ const Page = () => {
       password: data.password,
     });
   };
+
+  const onSubmitGoogle = async () => {
+    // Sign in with google
+    await signIn("google", {
+      callbackUrl: "/",
+    });
+  };
+
 
   return (
     <>
@@ -81,6 +97,7 @@ const Page = () => {
                   <button
                     aria-label="Login with Google"
                     type="button"
+                    onClick={onSubmitGoogle}
                     className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600"
                   >
                     <svg
@@ -105,7 +122,9 @@ const Page = () => {
                     {...register("name", { required: true })}
                   />
                   {errors.name && (
-                    <span className="text-red-500 text-sm">Name is required</span>
+                    <span className="text-red-500 text-sm">
+                      Name is required
+                    </span>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -120,7 +139,9 @@ const Page = () => {
                     {...register("email", { required: true })}
                   />
                   {errors.email && (
-                    <span className="text-red-500 text-sm">Email is required</span>
+                    <span className="text-red-500 text-sm">
+                      Email is required
+                    </span>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -135,7 +156,9 @@ const Page = () => {
                     {...register("password", { required: true })}
                   />
                   {errors.password && (
-                    <span className="text-red-500 text-sm">Password is required</span>
+                    <span className="text-red-500 text-sm">
+                      Password is required
+                    </span>
                   )}
                 </div>
               </div>
@@ -149,7 +172,11 @@ const Page = () => {
           </motion.div>
         </div>
       ) : (
-        <EmailVerification verificationData={VerificationData} email={watch("email")} setShowEmailVerification={setShowEmailVerification} />
+        <EmailVerification
+          verificationData={VerificationData}
+          email={watch("email")}
+          setShowEmailVerification={setShowEmailVerification}
+        />
       )}
     </>
   );

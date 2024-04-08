@@ -1,22 +1,28 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Heading from "./utils/Heading";
-import Navbar  from "./_components/ui/Navbar";
+import Navbar from "./_components/ui/Navbar";
 import Hero from "./_components/Route/Hero";
+import { useSocialLoginMutation } from "@/redux/features/auth/authApi";
+import { useSession } from "next-auth/react";
 
 interface Props {}
 
 const Page: FC<Props> = (props) => {
-  const [open, setOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState(0);
+  const [socialLogin, { isError, isLoading, isSuccess, data }] =
+    useSocialLoginMutation();
+  const { data: session } = useSession();
 
-  const navItems = [
-    { name: "Home", link: "/" },
-    { name: "About", link: "/about" },
-    { name: "Services", link: "/services" },
-    { name: "Contact", link: "/contact" },
-  ];
+  useEffect(() => {
+    if (session) {
+      socialLogin({
+        email: session.user?.email,
+        name: session.user?.name,
+        avatar: session.user?.image,
+      });
+    }
+  }, [session, socialLogin]);
 
   return (
     <>

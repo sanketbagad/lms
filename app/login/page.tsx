@@ -3,10 +3,16 @@ import React, { useEffect } from "react";
 import Navbar from "../_components/ui/Navbar";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { useLoginMutation } from "@/redux/features/auth/authApi";
+import {
+  useLoginMutation,
+  useSocialLoginMutation,
+} from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Heading from "../utils/Heading";
+import { signIn } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
+import Link from "next/link";
 
 type FormData = {
   email: string;
@@ -20,6 +26,9 @@ const Page = () => {
     formState: { errors },
   } = useForm<FormData>();
   const [login, { isError, data, isLoading, isSuccess }] = useLoginMutation();
+  const [socialLogin] = useSocialLoginMutation();
+  const { data: session } = useSession();
+  const alreadySignedIn = getSession();
 
   const router = useRouter();
 
@@ -28,14 +37,16 @@ const Page = () => {
     await login(data);
   };
 
-  useEffect(() => {
-    if (isSuccess && data) {
-      toast.success("Logged in successfully");
-      router.push("/");
-    } else if (isError) {
-      toast.error("Invalid credentials. Please try again.");
+  const onSubmitGoogle = async () => {
+    try {
+      await signIn("google", {
+        callbackUrl: "/"
+      });
+    } catch (error) {
+      toast.error("An error occurred. Please try again later.");
     }
-  }, [isSuccess, isError, data, router]);
+  };
+
 
   return (
     <>
@@ -57,18 +68,18 @@ const Page = () => {
           </h2>
           <p className="text-sm text-center dark:text-gray-600">
             Do Not have an account?{" "}
-            <a
+            <Link
               href="#"
               rel="noopener noreferrer"
               className="focus:underline hover:underline"
             >
               Sign up
-            </a>
+            </Link>
           </p>
           <div className="my-6 space-y-4">
             <button
               aria-label="Login with Google"
-              type="button"
+              onClick={onSubmitGoogle}
               className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600"
             >
               <svg
