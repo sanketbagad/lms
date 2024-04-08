@@ -4,14 +4,11 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import Navbar from "../_components/ui/Navbar";
 import EmailVerification from "../_components/EmailVerification";
-import {
-  useSocialLoginMutation,
-  useUserRegistrationMutation,
-} from "@/redux/features/auth/authApi";
+import { useUserRegistrationMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import Heading from "../utils/Heading";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 type FormData = {
@@ -31,7 +28,6 @@ const Page = () => {
   const [VerificationData, setVerificationData] = useState({});
   const [userRegistration, { isError, data, isLoading, isSuccess }] =
     useUserRegistrationMutation();
-
 
   const router = useRouter();
 
@@ -60,7 +56,6 @@ const Page = () => {
       callbackUrl: "/",
     });
   };
-
 
   return (
     <>
