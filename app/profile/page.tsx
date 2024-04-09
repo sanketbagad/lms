@@ -5,6 +5,7 @@ import Heading from "../utils/Heading";
 import { useSelector } from "react-redux";
 import Navbar from "../_components/ui/Navbar";
 import ProfileComponent from "../_components/Profile/ProfileComponent";
+import Sidebar from "../_components/Profile/Sidebar";
 
 type Props = {};
 
@@ -18,7 +19,10 @@ const Page = (props: Props) => {
         keywords={`Profile, ${user.name}, LMS, Learning Management System, Sanket Bagad`}
       />
       <Navbar />
+      <div className="flex w-full h-full">
+        <Sidebar />
         <ProfileComponent />
+      </div>
     </Protected>
   );
 };

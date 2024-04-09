@@ -7,26 +7,11 @@ interface Props {}
 const ProfileComponent = (props: Props) => {
   const { user } = useSelector((state: any) => state.auth);
 
-  console.log(user);
-  let courses: any = [
-    {
-      id: 1,
-      title: "Course 1",
-    },
-    {
-      id: 2,
-      title: "Course 2",
-    },
-    {
-      id: 3,
-      title: "Course 3",
-    },
-  ];
   return (
-    <div className="w-[100%] h-screen bg-gray-200 flex items-center justify-center flex-wrap">
+    <div className="w-[100%] h-[100vh] bg-gray-900 flex items-center justify-center flex-wrap">
       <div
-        className="shadow-xl bg-gray-900 text-white"
-        style={{ width: "100%", height: "100%" }}
+        className="shadow-xl bg-gray-900 text-white  h-[100vh] w-full"
+        // style={{ width: "100%", height: "100%" }}
       >
         <div className="border-b border-gray-800 px-8 py-3">
           <div className="inline-block w-3 h-3 mr-2 rounded-full bg-red-500"></div>
@@ -51,19 +36,6 @@ const ProfileComponent = (props: Props) => {
             <p>
               &nbsp;&nbsp;&nbsp;&nbsp;email:{" "}
               <span className="text-yellow-300">{user?.email}</span>,
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;role:{" "}
-              <span className="text-yellow-300">
-                <a
-                  href="https://scottwindon.com"
-                  target="_blank"
-                  className="text-yellow-300 hover:underline focus:border-none"
-                >
-                  {user?.role}
-                </a>
-              </span>
-              ,
             </p>
             <p>
               <p>
@@ -96,26 +68,7 @@ const ProfileComponent = (props: Props) => {
 
             <p>{"}"}</p>
           </div>
-          {/* Avatar Div */}
-          <div className="ml-1 mt-4 lg:mt-0">
-            <div>
-              <Image
-                src={user?.avatar?.url || "/assets/avatar.png"}
-                alt="avatar"
-                height={180}
-                width={180}
-              />
-              <button className="bg-blue-500 w-full text-white px-4 py-2 rounded-md mt-4">
-                <input type="file" style={{ display: "none" }} />
-                Change Avatar
-              </button>
-            </div>
-          </div>
-          <div className="mt-4 lg:hidden">
-            <button className="bg-blue-500 w-full text-white px-4 py-2 rounded-md mt-4">
-              Edit Profile
-            </button>
-          </div>
+        
         </div>
       </div>
     </div>
