@@ -1,3 +1,4 @@
+import { Are_You_Serious } from "next/font/google";
 import { apliSlice } from "../api/apiSlice";
 import { userLogin, userRegistration } from "./authSlice";
 
@@ -80,6 +81,17 @@ export const authApi = apliSlice.injectEndpoints({
         }
       },
     }),
+
+    myProfile: builder.query({
+      query: () => ({
+        url: "/user/me",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+    
+
+
   }),
 });
 
