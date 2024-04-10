@@ -38,3 +38,5 @@ export const userApi = apliSlice.injectEndpoints({
   }),
  
 });
+
+export const { useMyProfileQuery, useUpdateProfileMutation, useChangePasswordMutation, useUpdateAvatarMutation } = userApi;
