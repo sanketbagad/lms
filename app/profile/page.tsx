@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import Navbar from "../_components/ui/Navbar";
 import ProfileComponent from "../_components/Profile/ProfileComponent";
 import Sidebar from "../_components/Profile/Sidebar";
+import Account from "../_components/Profile/Account";
+import Course from "../_components/Profile/Course";
+
 
 type Props = {};
 
@@ -21,7 +24,9 @@ const Page = (props: Props) => {
       <Navbar />
       <div className="flex w-full h-full">
         <Sidebar />
-        <ProfileComponent />
+        {/* <ProfileComponent /> */}
+        <Account />
+        {/* <Course /> */}
       </div>
     </Protected>
   );
